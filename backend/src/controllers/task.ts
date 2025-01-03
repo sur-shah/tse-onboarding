@@ -87,20 +87,21 @@ export const updateTask: RequestHandler = async (req, res, next) => {
   const { title, description, isChecked } = req.body;
   const { id } = req.params;
   try {
-    validationErrorParser(errors)
-    if(id != req.body._id){
+    validationErrorParser(errors);
+    if (id != req.body._id) {
       res.status(400);
     }
-    const updatedTask = await TaskModel.findByIdAndUpdate(
-      id,
-      {title: title, description: description, isChecked: isChecked, dateCreated: Date.now()}
-    );
-    if(updatedTask == null){
-      res.status(404)
-    } else{
+    const updatedTask = await TaskModel.findByIdAndUpdate(id, {
+      title: title,
+      description: description,
+      isChecked: isChecked,
+      dateCreated: Date.now(),
+    });
+    if (updatedTask == null) {
+      res.status(404);
+    } else {
       res.status(200).json(updatedTask);
     }
-  
   } catch (error) {
     next(error);
   }

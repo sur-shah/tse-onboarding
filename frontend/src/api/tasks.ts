@@ -97,7 +97,7 @@ export async function getTask(id: string): Promise<APIResult<Task>> {
 
 export async function getAllTasks(): Promise<APIResult<Task[]>> {
   try {
-    const response = await get("/api/tasks")
+    const response = await get("/api/tasks");
     const json = (await response.json()) as TaskJSON[];
     const tasks = json.map(parseTask);
     return { success: true, data: tasks };
@@ -110,7 +110,7 @@ export async function updateTask(task: UpdateTaskRequest): Promise<APIResult<Tas
   try {
     const response = await post("/api/task", task);
     const json = (await response.json()) as TaskJSON;
-    const updatedTask = parseTask(json)
+    const updatedTask = parseTask(json);
     return { success: true, data: updatedTask };
   } catch (error) {
     return handleAPIError(error);
